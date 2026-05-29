@@ -73,3 +73,7 @@ a:hover { opacity: 0.75; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+main {
+  padding-bottom: 100px;
+}

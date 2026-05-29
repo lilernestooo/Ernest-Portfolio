@@ -1,3 +1,4 @@
+import { User, Briefcase, Grid, Star, Mail, Sun, Moon } from 'lucide-react'
 import styles from './Navbar.module.css'
 
 export default function Navbar({ theme, onToggle }) {
@@ -5,12 +6,28 @@ export default function Navbar({ theme, onToggle }) {
 
   return (
     <nav className={styles.nav}>
+      <div className={styles.logo}>EL</div>
       <div className={styles.links}>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="#about" title="About">
+          <span className={styles.linkText}>About</span>
+          <User size={16} className={styles.linkIcon} />
+        </a>
+        <a href="#experience" title="Experience">
+          <span className={styles.linkText}>Experience</span>
+          <Briefcase size={16} className={styles.linkIcon} />
+        </a>
+        <a href="#projects" title="Projects">
+          <span className={styles.linkText}>Projects</span>
+          <Grid size={16} className={styles.linkIcon} />
+        </a>
+        <a href="#skills" title="Skills">
+          <span className={styles.linkText}>Skills</span>
+          <Star size={16} className={styles.linkIcon} />
+        </a>
+        <a href="#contact" title="Contact">
+          <span className={styles.linkText}>Contact</span>
+          <Mail size={16} className={styles.linkIcon} />
+        </a>
       </div>
       <button
         className={styles.themeBtn}
@@ -18,26 +35,8 @@ export default function Navbar({ theme, onToggle }) {
         aria-label="Toggle theme"
         title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       >
-        {isDark ? (
-          /* Sun icon */
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-        ) : (
-          /* Moon icon */
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        )}
-        <span>{isDark ? 'Light' : 'Dark'}</span>
+        {isDark ? <Sun size={16} /> : <Moon size={16} />}
+        <span className={styles.themeBtnText}>{isDark ? 'Light' : 'Dark'}</span>
       </button>
     </nav>
   )

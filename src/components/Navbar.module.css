@@ -1,22 +1,32 @@
 .nav {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 40px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+  gap: 16px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+[data-theme='dark'] .nav {
+  background: rgba(24, 24, 24, 0.75);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .logo {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   font-size: 1.25rem;
-  color: var(--accent-highlight);
+  color: var(--black);
   letter-spacing: 0.05em;
 }
 
@@ -26,6 +36,9 @@
 }
 
 .links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
@@ -36,6 +49,14 @@
 .links a:hover {
   color: var(--text-primary);
   opacity: 1;
+}
+
+.linkIcon {
+  display: none;
+}
+
+.linkText {
+  display: inline;
 }
 
 .themeBtn {
@@ -58,7 +79,46 @@
   transform: scale(1.03);
 }
 
+/* ===== MOBILE ===== */
 @media (max-width: 640px) {
-  .nav { padding: 14px 20px; }
-  .links { display: none; }
+  .nav {
+    padding: 12px 20px;
+  }
+
+  .links {
+    gap: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 4px;
+  }
+
+  .links a {
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    border-radius: 99px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .links a:hover {
+    background: var(--bg-tag);
+    color: var(--text-primary);
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .linkIcon {
+    display: block;
+  }
+
+  .themeBtnText {
+    display: none;
+  }
+
+  .themeBtn {
+    padding: 8px 10px;
+  }
 }
