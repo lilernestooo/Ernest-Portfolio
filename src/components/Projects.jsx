@@ -5,16 +5,49 @@ export default function Projects() {
   return (
     <section id="projects" className={styles.section}>
       <div className="container">
-        <h2 className={styles.heading}>Projects</h2>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.heading}>Projects</h2>
+
+          <a
+            href="https://github.com/lilernestooo"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.viewAll}
+          >
+            View All Projects
+
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
+        </div>
+
         <div className={styles.projectGrid}>
           {data.projects.map((proj, i) => (
             <div key={i} className={styles.projectCard}>
               <div className={styles.projIcon}>{proj.icon}</div>
+
               <h3 className={styles.projName}>{proj.name}</h3>
-              <p className={styles.projDesc}>{proj.description}</p>
+
+              <p className={styles.projDesc}>
+                {proj.description}
+              </p>
+
               <div className={styles.tags}>
                 {proj.stack.map((s, j) => (
-                  <span key={j} className={styles.tag}>{s}</span>
+                  <span key={j} className={styles.tag}>
+                    {s}
+                  </span>
                 ))}
               </div>
             </div>

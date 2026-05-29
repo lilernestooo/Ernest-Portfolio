@@ -20,7 +20,7 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background: var(--accent-highlight);
+  background: #111110;
   border-radius: 99px;
 }
 
@@ -182,7 +182,7 @@
 .skillCategory {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--accent-highlight);
+  color: var(--black);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -252,4 +252,46 @@
   .section { padding: 48px 0; }
   .card { padding: 20px; }
   .contactCard { padding: 36px 24px; }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.sectionHeader .heading {
+  margin-bottom: 0;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111110;
+  text-decoration: none;
+  border: 1px solid #111110;
+  padding: 7px 16px;
+  border-radius: 99px;
+  transition: all 0.2s ease;
+}
+
+.viewAll:hover {
+  background: #111110;
+  color: #ffffff;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .viewAll {
+  color: #f0ede8;
+  border-color: #f0ede8;
+}
+
+[data-theme='dark'] .viewAll:hover {
+  background: #f0ede8;
+  color: #0e0e0e;
 }

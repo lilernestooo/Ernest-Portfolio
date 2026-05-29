@@ -110,7 +110,7 @@
   height: 240px;
   border-radius: 50%;
   padding: 4px;
-  background: linear-gradient(135deg, var(--accent-highlight), var(--border));
+  background: linear-gradient(135deg, var(--grey), var(--border));
   box-shadow: var(--shadow-hover);
 }
 
