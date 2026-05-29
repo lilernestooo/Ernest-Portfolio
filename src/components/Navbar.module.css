@@ -30,35 +30,69 @@
   letter-spacing: 0.05em;
 }
 
+/* === LINKS === */
 .links {
   display: flex;
-  gap: 28px;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 4px;
 }
 
-.links a {
+.link {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 99px;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 0.2s;
-  letter-spacing: 0.02em;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.links a:hover {
+
+.link:hover {
+  background: var(--bg-tag);
   color: var(--text-primary);
   opacity: 1;
 }
 
-.linkIcon {
-  display: none;
+/* === TOOLTIP === */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--text-primary);
+  color: var(--bg-card);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.linkText {
-  display: inline;
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--text-primary);
 }
 
+.link:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* === THEME BUTTON === */
 .themeBtn {
   display: flex;
   align-items: center;
@@ -74,44 +108,16 @@
   cursor: pointer;
   transition: all 0.25s ease;
 }
+
 .themeBtn:hover {
   background: var(--border);
   transform: scale(1.03);
 }
 
-/* ===== MOBILE ===== */
+/* === MOBILE === */
 @media (max-width: 640px) {
   .nav {
     padding: 12px 20px;
-  }
-
-  .links {
-    gap: 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 99px;
-    padding: 4px;
-  }
-
-  .links a {
-    width: 36px;
-    height: 36px;
-    justify-content: center;
-    border-radius: 99px;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .links a:hover {
-    background: var(--bg-tag);
-    color: var(--text-primary);
-  }
-
-  .linkText {
-    display: none;
-  }
-
-  .linkIcon {
-    display: block;
   }
 
   .themeBtnText {
