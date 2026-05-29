@@ -42,7 +42,7 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg);
   color: var(--text-primary);
   transition: background-color 0.35s ease, color 0.35s ease;
@@ -51,7 +51,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   line-height: 1.15;
 }
 
