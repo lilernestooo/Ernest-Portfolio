@@ -56,6 +56,8 @@
   border: 1px solid #000;
 }
 
+
+
 .bullets {
   list-style: none;
   display: flex;
@@ -78,36 +80,44 @@
   top: 2px;
 }
 
-/* === TAGS === */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
+  padding-top: 12px;
 }
 .tag {
   background: var(--bg-tag);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  padding: 4px 12px;
-  font-size: 0.8rem;
+  padding: 3px 10px;     /* slightly tighter */
+  font-size: 0.75rem;    /* slightly smaller */
   font-weight: 500;
   transition: all 0.2s;
+  white-space: nowrap;   /* ADD — prevents tags from breaking mid-word */
 }
 .tag:hover {
-  border-color: var(--accent-highlight);
-  color: var(--accent-highlight);
+  border-color: #000;
 }
 .honorTag {
   color: var(--accent-highlight);
   border-color: var(--accent-highlight);
 }
 
+.honorTag:hover {
+  background: var(--accent-highlight);
+  color: #ffffff;
+  border-color: var(--accent-highlight);
+}
+
+
 /* === PROJECT GRID === */
 .projectGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
+  align-items: stretch; /* ← ADD THIS */
 }
 
 .projectCard {
@@ -120,6 +130,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100%; /* ← ADD THIS */
 }
 .projectCard:hover {
   box-shadow: var(--shadow-hover);
@@ -127,8 +138,16 @@
 }
 
 .projIcon {
-  font-size: 2rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-tag);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  color: var(--text-muted); /* CHANGE from var(--text-primary) */
 }
 
 .projName {
@@ -218,10 +237,7 @@
   transition: all 0.2s ease;
 }
 .contactLink:hover {
-  border-color: var(--accent-highlight);
-  color: var(--accent-highlight);
-  opacity: 1;
-  transform: translateY(-2px);
+  border-color: #000;
 }
 
 /* === FOOTER === */
@@ -278,4 +294,11 @@
 [data-theme='dark'] .viewAll:hover {
   background: #f0ede8;
   color: #0e0e0e;
+}
+
+/* Dark Mode */
+[data-theme='dark'] .period {
+  color: var(--white);
+  background: var(--black);
+  border: 1px solid #fff;
 }
