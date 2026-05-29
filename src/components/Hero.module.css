@@ -1,70 +1,193 @@
 .hero {
-  padding: 80px 0 60px;
+  padding: 40px 0 20px;
 }
 
 .inner {
   display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* === TOP ROW === */
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
+}
+
+/* === PHOTO === */
+.photoWrap {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 64px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-/* === TEXT SIDE === */
-.text {
+.photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--border);
+  animation: photoFade 0.4s ease both;
+}
+
+.openForWork {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #16a34a;
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* === INFO === */
+.info {
   flex: 1;
-  animation: fadeUp 0.6s ease both;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
-.greeting {
-  font-size: 0.95rem;
-  color: var(--black);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .name {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
 
-.title {
-  font-size: 1.1rem;
-  color: var(--black);
-  font-weight: 500;
-  margin-bottom: 20px;
+.verifiedBadge {
+  display: flex;
+  align-items: center;
 }
 
-.about {
+/* === META ROW === */
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.metaDot {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+.metaLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.metaLink:hover {
+  color: var(--text-primary);
+}
+
+.title {
   font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 28px;
-  max-width: 520px;
+  font-weight: 500;
 }
 
+/* === TOP RIGHT BADGE === */
+.topBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #fcd34d;
+  color: #92400e;
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* === DIVIDER === */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+/* === ABOUT SECTION LABEL — matches Section.module.css heading === */
+.sectionLabel {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 36px;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.sectionLabel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: #111110;
+  border-radius: 99px;
+}
+
+/* === ABOUT === */
+.about {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* === ACTIONS — matches old modeBadge size === */
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 6px;
+  margin-top: 4px;
 }
 
 .btnPrimary,
 .btnSecondary {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 10px 20px;
+  gap: 5px;
+  padding: 3px 12px;
   border-radius: 99px;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all 0.2s ease;
   text-decoration: none;
+  border: 1px solid transparent;
 }
 
 .btnPrimary {
@@ -79,67 +202,11 @@
 .btnSecondary {
   background: var(--bg-tag);
   color: var(--text-primary);
-  border: 1px solid var(--border);
+  border-color: var(--border);
 }
 .btnSecondary:hover {
-  border-color: var(--accent-highlight);
-  color: var(--accent-highlight);
-  opacity: 1;
+  border-color: var(--text-primary);
   transform: translateY(-1px);
-}
-
-.meta {
-  display: flex;
-  gap: 20px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* === PHOTO SIDE === */
-.photoWrap {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  animation: fadeUp 0.6s ease 0.15s both;
-}
-
-.photoRing {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  padding: 4px;
-  background: linear-gradient(135deg, var(--grey), var(--border));
-  box-shadow: var(--shadow-hover);
-}
-
-.photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  animation: photoFade 0.4s ease both;
-  transition: filter 0.4s ease;
-}
-
-.modeTag {
-  background: var(--bg-tag);
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  padding: 5px 14px;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-/* === ANIMATIONS === */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes photoFade {
@@ -147,42 +214,63 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-@media (max-width: 768px) {
-  .inner {
-    flex-direction: column-reverse;
-    gap: 32px;
-    text-align: center;
-  }
-  .about { max-width: 100%; }
-  .actions { justify-content: center; }
-  .meta { justify-content: center; }
-  .photoRing { width: 180px; height: 180px; }
-}
-
-.openForWork {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: #f0fdf4;
-  border: 1px solid #86efac;
-  color: #16a34a;
-  border-radius: 99px;
-  padding: 6px 16px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  background: #22c55e;
-  border-radius: 50%;
-  animation: pulse 1.8s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* === MOBILE === */
+@media (max-width: 640px) {
+  .card {
+    padding: 20px;
+  }
+
+  .topRow {
+    flex-wrap: wrap;
+  }
+
+  .photoWrap {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .photo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .topBadge {
+    position: static;
+    align-self: flex-start;
+    margin-left: auto;
+  }
+
+  .info {
+    width: 100%;
+    flex: unset;
+  }
+
+  .metaRow {
+    font-size: 0.75rem;
+  }
+
+  .metaDot {
+    display: none;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+  }
+}
+
+.aboutSection {
+  padding-top: 8px;
 }
