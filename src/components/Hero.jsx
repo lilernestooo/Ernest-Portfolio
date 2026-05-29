@@ -1,5 +1,6 @@
 import profileLight from '../assets/profile-light.png'
 import profileDark from '../assets/profile-dark.png'
+import { MapPin, Phone, Mail } from 'lucide-react'
 import { data } from '../data.js'
 import styles from './Hero.module.css'
 
@@ -37,17 +38,18 @@ export default function Hero({ theme }) {
               </div>
 
               <div className={styles.metaRow}>
-                <p className={styles.location}>📍 {data.location}</p>
-                <span className={styles.metaDot}>·</span>
-                <a href="tel:09354681910" className={styles.metaLink}>
-                  📞 09354681910
-                </a>
-                <span className={styles.metaDot}>·</span>
-                <a href="mailto:ernestlazatin69@gmail.com" className={styles.metaLink}>
-                  ✉️ ernestlazatin69@gmail.com
-                </a>
-              </div>
-
+              <p className={styles.location}>
+                <MapPin size={13} strokeWidth={2} /> {data.location}
+              </p>
+              <span className={styles.metaDot}>·</span>
+              <a href="tel:09354681910" className={styles.metaLink}>
+                <Phone size={13} strokeWidth={2} /> 09354681910
+              </a>
+              <span className={styles.metaDot}>·</span>
+              <a href="mailto:ernestlazatin69@gmail.com" className={styles.metaLink}>
+                <Mail size={13} strokeWidth={2} /> ernestlazatin69@gmail.com
+              </a>
+            </div>
               <p className={styles.title}>{data.title}</p>
 
               {/* Action buttons — sized to match old modeBadge */}

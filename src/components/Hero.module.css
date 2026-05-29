@@ -104,6 +104,9 @@
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
+  display: inline-flex;   /* ADD */
+  align-items: center;    /* ADD */
+  gap: 4px;
 }
 
 .metaLink:hover {
@@ -273,4 +276,10 @@
 
 .aboutSection {
   padding-top: 8px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

@@ -24,21 +24,6 @@
   border-radius: 99px;
 }
 
-/* === CARD === */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 32px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-.card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-}
-
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -63,12 +48,12 @@
 
 .period {
   font-size: 0.8rem;
-  color: var(--text-muted);
-  background: var(--bg-tag);
+  color: var(--black);
+  background: var(--white);
   padding: 4px 12px;
   border-radius: 99px;
   white-space: nowrap;
-  border: 1px solid var(--border);
+  border: 1px solid #000;
 }
 
 .bullets {
@@ -250,7 +235,6 @@
 
 @media (max-width: 640px) {
   .section { padding: 48px 0; }
-  .card { padding: 20px; }
   .contactCard { padding: 36px 24px; }
 }
 

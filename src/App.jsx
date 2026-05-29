@@ -16,9 +16,9 @@ export default function App() {
       <main>
         <Hero theme={theme} />
         <Experience />
+        <Education />
         <Projects />
         <Skills />
-        <Education />
         <Contact />
       </main>
       <footer className={styles.footer}>
