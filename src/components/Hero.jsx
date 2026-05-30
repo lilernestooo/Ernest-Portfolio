@@ -263,13 +263,13 @@ export default function Hero({ theme }) {
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="caller_name">Full Name</label>
                     <input id="caller_name" name="caller_name" type="text"
-                      className={styles.fieldInput} placeholder="Jane Doe"
+                      className={styles.fieldInput} placeholder="Juan Dela Cruz" 
                       value={callFields.caller_name} onChange={handleCallChange} autoComplete="name" />
                   </div>
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="caller_email">Email Address</label>
                     <input id="caller_email" name="caller_email" type="email"
-                      className={styles.fieldInput} placeholder="jane@example.com"
+                      className={styles.fieldInput} placeholder="juan@example.com"
                       value={callFields.caller_email} onChange={handleCallChange} autoComplete="email" />
                   </div>
                 </div>
@@ -402,13 +402,13 @@ export default function Hero({ theme }) {
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="from_name">Full Name</label>
                     <input id="from_name" name="from_name" type="text"
-                      className={styles.fieldInput} placeholder="Jane Doe"
+                      className={styles.fieldInput} placeholder="Juan Dela Cruz"
                       value={fields.from_name} onChange={handleChange} autoComplete="name" />
                   </div>
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="from_email">Email Address</label>
                     <input id="from_email" name="from_email" type="email"
-                      className={styles.fieldInput} placeholder="jane@example.com"
+                      className={styles.fieldInput} placeholder="juan@example.com"
                       value={fields.from_email} onChange={handleChange} autoComplete="email" />
                   </div>
                 </div>
@@ -446,7 +446,7 @@ export default function Hero({ theme }) {
                 )}
 
                 <div className={styles.contactFooter}>
-                  <p className={styles.contactDisclaimer}>I typically respond within 1–2 business days.</p>
+                  <p className={styles.contactDisclaimer}>I respond the same day!</p>
                   <button type="submit" className={styles.btnPrimary} disabled={sendState === SEND_STATES.SENDING}>
                     {sendState === SEND_STATES.SENDING ? (
                       <>
