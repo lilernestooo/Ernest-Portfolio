@@ -104,8 +104,8 @@
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
-  display: inline-flex;   /* ADD */
-  align-items: center;    /* ADD */
+  display: inline-flex;
+  align-items: center;
   gap: 4px;
 }
 
@@ -141,7 +141,7 @@
   margin: 24px 0;
 }
 
-/* === ABOUT SECTION LABEL — matches Section.module.css heading === */
+/* === ABOUT SECTION LABEL === */
 .sectionLabel {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 800;
@@ -170,7 +170,7 @@
   line-height: 1.75;
 }
 
-/* === ACTIONS — matches old modeBadge size === */
+/* === ACTIONS === */
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -191,6 +191,7 @@
   transition: all 0.2s ease;
   text-decoration: none;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .btnPrimary {
@@ -200,6 +201,11 @@
 .btnPrimary:hover {
   opacity: 0.85;
   transform: translateY(-1px);
+}
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btnSecondary {
@@ -284,7 +290,9 @@
   gap: 4px;
 }
 
-/* === RESUME MODAL === */
+/* ═══════════════════════════════════════════════
+   SHARED MODAL BASE
+═══════════════════════════════════════════════ */
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -359,6 +367,188 @@
   border: none;
 }
 
+/* ═══════════════════════════════════════════════
+   CONTACT MODAL — overrides + extensions
+═══════════════════════════════════════════════ */
+.contactModal {
+  max-width: 560px;
+  height: auto;          /* auto height — not full 90vh */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Header meta (avatar + title + subtitle) */
+.contactModalMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contactAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--text-primary);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contactSubtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
+  margin-top: 1px;
+}
+
+/* Form body */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+/* Two-column row for name + email */
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Field group */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fieldLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.fieldInput {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.fieldInput::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.fieldInput:focus {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.fieldTextarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+/* Error message */
+.formError {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+/* Footer */
+.contactFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  gap: 12px;
+}
+
+.contactDisclaimer {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Spinner */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Success state */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 28px 32px;
+  gap: 10px;
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.successTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.successText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 300px;
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
