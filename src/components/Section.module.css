@@ -20,8 +20,15 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background: #111110;
   border-radius: 99px;
+  background: linear-gradient(90deg, #111110, #888, #111110);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .cardHeader {
@@ -101,8 +108,29 @@
   border-color: #000;
 }
 .honorTag {
-  color: var(--accent-highlight);
+  color: var(--accent-black);
   border-color: var(--accent-highlight);
+  background: linear-gradient(90deg, #fef3c7, #fde68a, #fef3c7);
+  background-size: 200% 100%;
+  animation: goldShimmer 2.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.honorTag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shine 2.5s ease-in-out infinite;
 }
 
 .honorTag:hover {
@@ -111,6 +139,31 @@
   border-color: var(--accent-highlight);
 }
 
+/* ── Dark mode ── */
+[data-theme='dark'] .honorTag {
+  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
+  background-size: 200% 100%;
+  animation: goldShimmer 2.5s ease-in-out infinite;
+  color: #fcd34d;
+  border-color: #92400e;
+}
+
+[data-theme='dark'] .honorTag:hover {
+  background: var(--accent-highlight);
+  color: #ffffff;
+  border-color: var(--accent-highlight);
+}
+
+@keyframes goldShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes shine {
+  0%   { left: -75%; }
+  50%  { left: 125%; }
+  100% { left: 125%; }
+}
 
 /* === PROJECT GRID === */
 .projectGrid {

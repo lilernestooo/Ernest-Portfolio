@@ -159,8 +159,15 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background: #111110;
   border-radius: 99px;
+  background: linear-gradient(90deg, #111110, #888, #111110);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* === ABOUT === */
