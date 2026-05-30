@@ -6,31 +6,57 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 import { data } from '../data.js'
 import styles from './Hero.module.css'
 
-// ─── EmailJS Config ──────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+// ─── EmailJS Config ───────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID       = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID      = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_CALL_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CALL_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY       = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SEND_STATES = { IDLE: 'idle', SENDING: 'sending', SENT: 'sent', ERROR: 'error' }
+
+const TIME_SLOTS = [
+  '9:00 AM', '9:30 AM',
+  '10:00 AM', '10:30 AM',
+  '11:00 AM', '11:30 AM',
+  '1:00 PM', '1:30 PM',
+  '2:00 PM', '2:30 PM',
+  '3:00 PM', '3:30 PM',
+  '4:00 PM', '4:30 PM',
+]
+
+const CALL_TYPES = [
+  { value: 'intro',        label: 'Introduction Call',  desc: '15 min' },
+  { value: 'project',      label: 'Project Discussion', desc: '30 min' },
+  { value: 'consultation', label: 'Consultation',       desc: '45 min' },
+  { value: 'interview',    label: 'Interview',          desc: '60 min' },
+]
+
+const todayStr = () => new Date().toISOString().split('T')[0]
 
 export default function Hero({ theme }) {
   const isDark = theme === 'dark'
   const photo  = isDark ? profileDark : profileLight
 
-  const [showResume,  setShowResume]  = useState(false)
-  const [showContact, setShowContact] = useState(false)
-  const [sendState,   setSendState]   = useState(SEND_STATES.IDLE)
-  const [formError,   setFormError]   = useState('')
+  const [showResume,   setShowResume]   = useState(false)
+  const [showContact,  setShowContact]  = useState(false)
+  const [showSchedule, setShowSchedule] = useState(false)
+
+  const [sendState, setSendState] = useState(SEND_STATES.IDLE)
+  const [callState, setCallState] = useState(SEND_STATES.IDLE)
+  const [formError, setFormError] = useState('')
+  const [callError, setCallError] = useState('')
 
   const formRef = useRef(null)
+  const callRef = useRef(null)
 
-  // ── Field state ──────────────────────────────────────────────────────────
   const [fields, setFields] = useState({
-    from_name:    '',
-    from_email:   '',
-    subject:      '',
-    message:      '',
+    from_name: '', from_email: '', subject: '', message: '',
+  })
+
+  const [callFields, setCallFields] = useState({
+    caller_name: '', caller_email: '', call_type: '',
+    call_date: '', call_time: '', call_note: '',
   })
 
   const handleChange = e => {
@@ -38,7 +64,11 @@ export default function Hero({ theme }) {
     if (formError) setFormError('')
   }
 
-  // ── Validation ───────────────────────────────────────────────────────────
+  const handleCallChange = e => {
+    setCallFields(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    if (callError) setCallError('')
+  }
+
   const validate = () => {
     if (!fields.from_name.trim())  return 'Please enter your name.'
     if (!fields.from_email.trim()) return 'Please enter your email address.'
@@ -49,47 +79,58 @@ export default function Hero({ theme }) {
     return ''
   }
 
-  // ── Send ─────────────────────────────────────────────────────────────────
+  const validateCall = () => {
+    if (!callFields.caller_name.trim())  return 'Please enter your name.'
+    if (!callFields.caller_email.trim()) return 'Please enter your email address.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(callFields.caller_email))
+      return 'Please enter a valid email address.'
+    if (!callFields.call_type)  return 'Please select a call type.'
+    if (!callFields.call_date)  return 'Please select a date.'
+    if (!callFields.call_time)  return 'Please select a time slot.'
+    return ''
+  }
+
   const handleSend = async e => {
     e.preventDefault()
     const error = validate()
     if (error) { setFormError(error); return }
-
     setSendState(SEND_STATES.SENDING)
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY,
-      )
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
       setSendState(SEND_STATES.SENT)
       setFields({ from_name: '', from_email: '', subject: '', message: '' })
-    } catch {
-      setSendState(SEND_STATES.ERROR)
-    }
+    } catch { setSendState(SEND_STATES.ERROR) }
+  }
+
+  const handleSchedule = async e => {
+    e.preventDefault()
+    const error = validateCall()
+    if (error) { setCallError(error); return }
+    setCallState(SEND_STATES.SENDING)
+    try {
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_CALL_TEMPLATE_ID, callRef.current, EMAILJS_PUBLIC_KEY)
+      setCallState(SEND_STATES.SENT)
+      setCallFields({ caller_name: '', caller_email: '', call_type: '', call_date: '', call_time: '', call_note: '' })
+    } catch { setCallState(SEND_STATES.ERROR) }
   }
 
   const closeContact = () => {
-    setShowContact(false)
-    setSendState(SEND_STATES.IDLE)
-    setFormError('')
+    setShowContact(false); setSendState(SEND_STATES.IDLE); setFormError('')
     setFields({ from_name: '', from_email: '', subject: '', message: '' })
+  }
+
+  const closeSchedule = () => {
+    setShowSchedule(false); setCallState(SEND_STATES.IDLE); setCallError('')
+    setCallFields({ caller_name: '', caller_email: '', call_type: '', call_date: '', call_time: '', call_note: '' })
   }
 
   return (
     <section className={styles.hero} id="about">
       <div className={`container ${styles.inner}`}>
 
-        {/* Top row: photo + info */}
         <div className={styles.topRow}>
           <div className={styles.photoWrap}>
-            <img
-              src={photo}
-              alt={data.name}
-              className={styles.photo}
-              key={theme}
-            />
+            <img src={photo} alt={data.name} className={styles.photo} key={theme} />
             <div className={styles.openForWork}>
               <span className={styles.dot} />
               Open for Work
@@ -123,12 +164,7 @@ export default function Hero({ theme }) {
             <p className={styles.title}>{data.title}</p>
 
             <div className={styles.actions}>
-              <a
-                href="https://calendly.com"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.btnPrimary}
-              >
+              <button className={styles.btnPrimary} onClick={() => setShowSchedule(true)}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
                   <line x1="16" y1="2" x2="16" y2="6"/>
@@ -136,13 +172,9 @@ export default function Hero({ theme }) {
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
                 Schedule a Call
-              </a>
+              </button>
 
-              {/* ── Send Email → opens contact modal ── */}
-              <button
-                className={styles.btnSecondary}
-                onClick={() => setShowContact(true)}
-              >
+              <button className={styles.btnSecondary} onClick={() => setShowContact(true)}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                   <polyline points="22,6 12,13 2,6"/>
@@ -156,6 +188,7 @@ export default function Hero({ theme }) {
                 </svg>
                 GitHub
               </a>
+
               <a href={data.linkedin} target="_blank" rel="noreferrer" className={styles.btnSecondary}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -177,10 +210,8 @@ export default function Hero({ theme }) {
           </div>
         </div>
 
-        {/* Divider */}
         <div className={styles.divider} />
 
-        {/* About */}
         <div className={styles.aboutSection}>
           <p className={styles.sectionLabel}>About</p>
           <p className={styles.about}>{data.about}</p>
@@ -188,14 +219,157 @@ export default function Hero({ theme }) {
 
       </div>
 
-      {/* ══════════════════════════════════════════════════
-          CONTACT FORM MODAL
-      ══════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════ SCHEDULE MODAL ══════════════════════════════ */}
+      {showSchedule && (
+        <div className={styles.modalOverlay} onClick={closeSchedule}>
+          <div className={`${styles.modal} ${styles.contactModal}`} onClick={e => e.stopPropagation()}>
+
+            <div className={styles.modalHeader}>
+              <div className={styles.contactModalMeta}>
+                <div className={styles.contactAvatar}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div>
+                  <span className={styles.modalTitle}>Schedule a Call</span>
+                  <p className={styles.contactSubtitle}>Philippine Standard Time (UTC+8)</p>
+                </div>
+              </div>
+              <button className={styles.closeBtn} onClick={closeSchedule}>✕</button>
+            </div>
+
+            {callState === SEND_STATES.SENT ? (
+              <div className={styles.successState}>
+                <div className={styles.successIcon}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </div>
+                <h3 className={styles.successTitle}>Request Sent!</h3>
+                <p className={styles.successText}>
+                  Your call request has been received. I'll confirm the schedule via email within 1–2 business days.
+                </p>
+                <button className={styles.btnPrimary} onClick={closeSchedule} style={{ marginTop: 8 }}>Close</button>
+              </div>
+            ) : (
+              <form ref={callRef} onSubmit={handleSchedule} className={styles.contactForm} noValidate>
+
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel} htmlFor="caller_name">Full Name</label>
+                    <input id="caller_name" name="caller_name" type="text"
+                      className={styles.fieldInput} placeholder="Jane Doe"
+                      value={callFields.caller_name} onChange={handleCallChange} autoComplete="name" />
+                  </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel} htmlFor="caller_email">Email Address</label>
+                    <input id="caller_email" name="caller_email" type="email"
+                      className={styles.fieldInput} placeholder="jane@example.com"
+                      value={callFields.caller_email} onChange={handleCallChange} autoComplete="email" />
+                  </div>
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <label className={styles.fieldLabel}>Call Type</label>
+                  <div className={styles.callTypeGrid}>
+                    {CALL_TYPES.map(ct => (
+                      <label key={ct.value}
+                        className={`${styles.callTypeCard} ${callFields.call_type === ct.value ? styles.callTypeActive : ''}`}>
+                        <input type="radio" name="call_type" value={ct.value}
+                          checked={callFields.call_type === ct.value}
+                          onChange={handleCallChange} style={{ display: 'none' }} />
+                        <span className={styles.callTypeLabel}>{ct.label}</span>
+                        <span className={styles.callTypeDuration}>{ct.desc}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel} htmlFor="call_date">Preferred Date</label>
+                    <input id="call_date" name="call_date" type="date"
+                      className={styles.fieldInput} min={todayStr()}
+                      value={callFields.call_date} onChange={handleCallChange} />
+                  </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel} htmlFor="call_time">Preferred Time</label>
+                    <select id="call_time" name="call_time"
+                      className={styles.fieldInput}
+                      value={callFields.call_time} onChange={handleCallChange}>
+                      <option value="">Select a time slot</option>
+                      {TIME_SLOTS.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <label className={styles.fieldLabel} htmlFor="call_note">
+                    Additional Notes <span className={styles.fieldOptional}>(optional)</span>
+                  </label>
+                  <textarea id="call_note" name="call_note"
+                    className={`${styles.fieldInput} ${styles.fieldTextarea}`}
+                    placeholder="What would you like to discuss?"
+                    value={callFields.call_note} onChange={handleCallChange} rows={3} />
+                </div>
+
+                {callError && (
+                  <p className={styles.formError}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    {callError}
+                  </p>
+                )}
+                {callState === SEND_STATES.ERROR && (
+                  <p className={styles.formError}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    Something went wrong. Please try again or email directly.
+                  </p>
+                )}
+
+                <div className={styles.contactFooter}>
+                  <p className={styles.contactDisclaimer}>I'll confirm your slot via email.</p>
+                  <button type="submit" className={styles.btnPrimary} disabled={callState === SEND_STATES.SENDING}>
+                    {callState === SEND_STATES.SENDING ? (
+                      <>
+                        <svg className={styles.spinner} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        </svg>
+                        Sending…
+                      </>
+                    ) : (
+                      <>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="4" width="18" height="18" rx="2"/>
+                          <line x1="16" y1="2" x2="16" y2="6"/>
+                          <line x1="8" y1="2" x2="8" y2="6"/>
+                          <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Request Call
+                      </>
+                    )}
+                  </button>
+                </div>
+
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════ CONTACT MODAL ══════════════════════════════ */}
       {showContact && (
         <div className={styles.modalOverlay} onClick={closeContact}>
           <div className={`${styles.modal} ${styles.contactModal}`} onClick={e => e.stopPropagation()}>
 
-            {/* Header */}
             <div className={styles.modalHeader}>
               <div className={styles.contactModalMeta}>
                 <div className={styles.contactAvatar}>
@@ -209,7 +383,6 @@ export default function Hero({ theme }) {
               <button className={styles.closeBtn} onClick={closeContact}>✕</button>
             </div>
 
-            {/* Success state */}
             {sendState === SEND_STATES.SENT ? (
               <div className={styles.successState}>
                 <div className={styles.successIcon}>
@@ -219,76 +392,42 @@ export default function Hero({ theme }) {
                   </svg>
                 </div>
                 <h3 className={styles.successTitle}>Message Sent!</h3>
-                <p className={styles.successText}>
-                  Thanks for reaching out. I'll get back to you as soon as possible.
-                </p>
-                <button className={styles.btnPrimary} onClick={closeContact} style={{ marginTop: 8 }}>
-                  Close
-                </button>
+                <p className={styles.successText}>Thanks for reaching out. I'll get back to you as soon as possible.</p>
+                <button className={styles.btnPrimary} onClick={closeContact} style={{ marginTop: 8 }}>Close</button>
               </div>
             ) : (
-              /* Form */
               <form ref={formRef} onSubmit={handleSend} className={styles.contactForm} noValidate>
 
-                {/* From name + email */}
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="from_name">Full Name</label>
-                    <input
-                      id="from_name"
-                      name="from_name"
-                      type="text"
-                      className={styles.fieldInput}
-                      placeholder="Jane Doe"
-                      value={fields.from_name}
-                      onChange={handleChange}
-                      autoComplete="name"
-                    />
+                    <input id="from_name" name="from_name" type="text"
+                      className={styles.fieldInput} placeholder="Jane Doe"
+                      value={fields.from_name} onChange={handleChange} autoComplete="name" />
                   </div>
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel} htmlFor="from_email">Email Address</label>
-                    <input
-                      id="from_email"
-                      name="from_email"
-                      type="email"
-                      className={styles.fieldInput}
-                      placeholder="jane@example.com"
-                      value={fields.from_email}
-                      onChange={handleChange}
-                      autoComplete="email"
-                    />
+                    <input id="from_email" name="from_email" type="email"
+                      className={styles.fieldInput} placeholder="jane@example.com"
+                      value={fields.from_email} onChange={handleChange} autoComplete="email" />
                   </div>
                 </div>
 
-                {/* Subject */}
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel} htmlFor="subject">Subject</label>
-                  <input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    className={styles.fieldInput}
-                    placeholder="Project inquiry / Collaboration / etc."
-                    value={fields.subject}
-                    onChange={handleChange}
-                  />
+                  <input id="subject" name="subject" type="text"
+                    className={styles.fieldInput} placeholder="Project inquiry / Collaboration / etc."
+                    value={fields.subject} onChange={handleChange} />
                 </div>
 
-                {/* Message */}
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel} htmlFor="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
+                  <textarea id="message" name="message"
                     className={`${styles.fieldInput} ${styles.fieldTextarea}`}
                     placeholder="Hi Ernest, I'd like to discuss…"
-                    value={fields.message}
-                    onChange={handleChange}
-                    rows={5}
-                  />
+                    value={fields.message} onChange={handleChange} rows={5} />
                 </div>
 
-                {/* Error */}
                 {formError && (
                   <p className={styles.formError}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -297,8 +436,6 @@ export default function Hero({ theme }) {
                     {formError}
                   </p>
                 )}
-
-                {/* Server error */}
                 {sendState === SEND_STATES.ERROR && (
                   <p className={styles.formError}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -308,16 +445,9 @@ export default function Hero({ theme }) {
                   </p>
                 )}
 
-                {/* Footer */}
                 <div className={styles.contactFooter}>
-                  <p className={styles.contactDisclaimer}>
-                    I typically respond within 1–2 business days.
-                  </p>
-                  <button
-                    type="submit"
-                    className={styles.btnPrimary}
-                    disabled={sendState === SEND_STATES.SENDING}
-                  >
+                  <p className={styles.contactDisclaimer}>I typically respond within 1–2 business days.</p>
+                  <button type="submit" className={styles.btnPrimary} disabled={sendState === SEND_STATES.SENDING}>
                     {sendState === SEND_STATES.SENDING ? (
                       <>
                         <svg className={styles.spinner} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -339,25 +469,18 @@ export default function Hero({ theme }) {
 
               </form>
             )}
-
           </div>
         </div>
       )}
 
-      {/* ══════════════════════════════════════════════════
-          RESUME MODAL (unchanged)
-      ══════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════ RESUME MODAL ══════════════════════════════ */}
       {showResume && (
         <div className={styles.modalOverlay} onClick={() => setShowResume(false)}>
           <div className={styles.modal} onClick={e => e.stopPropagation()}>
             <div className={styles.modalHeader}>
               <span className={styles.modalTitle}>Ernest Bernard T. Lazatin — Resume</span>
               <div className={styles.modalActions}>
-                <a
-                  href="/Ernest Lazatin (Resume).pdf"
-                  download="Ernest Lazatin (Resume).pdf"
-                  className={styles.btnPrimary}
-                >
+                <a href="/Ernest Lazatin (Resume).pdf" download="Ernest Lazatin (Resume).pdf" className={styles.btnPrimary}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                     <polyline points="7 10 12 15 17 10"/>
@@ -368,11 +491,7 @@ export default function Hero({ theme }) {
                 <button className={styles.closeBtn} onClick={() => setShowResume(false)}>✕</button>
               </div>
             </div>
-            <iframe
-              src="../Ernest Lazatin (Resume).pdf"
-              className={styles.resumeFrame}
-              title="Ernest Lazatin Resume"
-            />
+            <iframe src="../Ernest Lazatin (Resume).pdf" className={styles.resumeFrame} title="Ernest Lazatin Resume" />
           </div>
         </div>
       )}

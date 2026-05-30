@@ -22,7 +22,7 @@ export default function App() {
         <Contact />
       </main>
       <footer className={styles.footer}>
-        © {new Date().getFullYear()} Ernest Bernard T. Lazatin · Built with React + Vite
+        © {new Date().getFullYear()} Ernest Bernard T. Lazatin · kargadev
       </footer>
     </>
   )

@@ -565,3 +565,59 @@
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ═══════════════════════════════════════════════
+   CALL TYPE CARDS
+═══════════════════════════════════════════════ */
+.callTypeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .callTypeGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.callTypeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-md, 10px);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.callTypeCard:hover {
+  border-color: var(--text-primary);
+}
+
+.callTypeActive {
+  border-color: var(--text-primary);
+  background: var(--bg-tag);
+  box-shadow: inset 0 0 0 1px var(--text-primary);
+}
+
+.callTypeLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.callTypeDuration {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.fieldOptional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
