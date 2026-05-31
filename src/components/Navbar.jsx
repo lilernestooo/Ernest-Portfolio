@@ -25,14 +25,19 @@ export default function Navbar({ theme, onToggle }) {
         ))}
       </div>
 
-      <button
-        className={styles.themeBtn}
-        onClick={onToggle}
-        aria-label="Toggle theme"
-      >
-        {isDark ? <Sun size={16} /> : <Moon size={16} />}
-        <span className={styles.themeBtnText}>{isDark ? 'Light' : 'Dark'}</span>
-      </button>
+      <label className={styles.toggle} aria-label="Toggle theme">
+        <input
+          type="checkbox"
+          checked={isDark}
+          onChange={onToggle}
+          className={styles.toggleInput}
+        />
+        <span className={styles.toggleTrack}>
+          <span className={styles.toggleIcon}>
+            {isDark ? <Moon size={12} strokeWidth={2.5} /> : <Sun size={12} strokeWidth={2.5} />}
+          </span>
+        </span>
+      </label>
     </nav>
   )
 }
