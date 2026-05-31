@@ -5,7 +5,7 @@ export const data = {
   phone: "09354681910",
   email: "ernestlazatin69@gmail.com",
   github: "https://github.com/lilernestooo",
-  linkedin: "https://linkedin.com/in/lazatin-ernest-bernard-t/",
+  linkedin: "https://www.linkedin.com/in/lazatin-ernest-bernard-t-772b07380/",
   resumeUrl: '/Ernest Lazatin (Resume).pdf', // place your resume.pdf inside the /public folder
 
   about:
