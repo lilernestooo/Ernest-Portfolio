@@ -225,8 +225,26 @@
   pointer-events: none;
   z-index: 99;
   cursor: ns-resize;
+  overflow: hidden;
   transition: opacity 0.4s ease, transform 0.4s ease, width 0.3s ease;
   animation: glowPulse 2s ease-in-out infinite;
+}
+
+.glowLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s ease-in-out infinite;
 }
 
 .glowVisible {
@@ -250,4 +268,9 @@
       0 0 14px 4px rgba(0, 0, 0, 0.9),
       0 0 32px 8px rgba(0, 0, 0, 0.5);
   }
+}
+
+@keyframes shimmer {
+  0%   { left: -60%; }
+  100% { left: 120%; }
 }
