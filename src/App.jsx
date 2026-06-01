@@ -5,7 +5,7 @@ import Experience from './components/Experience.jsx'
 import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import { Education, Contact } from './components/EducationContact.jsx'
-import styles from './components/Section.module.css'
+import styles from './styles/Section.module.css'
 
 export default function App() {
   const { theme, toggle } = useTheme()

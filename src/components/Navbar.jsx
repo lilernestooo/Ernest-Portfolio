@@ -1,5 +1,5 @@
 import { User, Briefcase, Grid, Star, Mail, Sun, Moon } from 'lucide-react'
-import styles from './Navbar.module.css'
+import styles from '../styles/Navbar.module.css'
 
 const links = [
   { href: '#about',      label: 'About',      Icon: User },

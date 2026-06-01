@@ -1,6 +1,6 @@
 import { Waves, School, GraduationCap } from 'lucide-react'
 import { data } from '../data.js'
-import styles from './Section.module.css'
+import styles from '../styles/Section.module.css'
 
 const iconMap = {
   FloodWatch: Waves,

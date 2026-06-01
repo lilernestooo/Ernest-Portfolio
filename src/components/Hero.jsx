@@ -4,7 +4,7 @@ import profileLight from '../assets/profile-light.png'
 import profileDark from '../assets/profile-dark.png'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { data } from '../data.js'
-import styles from './Hero.module.css'
+import styles from '../styles/Hero.module.css'
 
 // ─── EmailJS Config ───────────────────────────────────────────────────────────
 const EMAILJS_SERVICE_ID       = import.meta.env.VITE_EMAILJS_SERVICE_ID

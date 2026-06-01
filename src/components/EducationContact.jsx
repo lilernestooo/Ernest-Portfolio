@@ -1,5 +1,5 @@
 import { data } from '../data.js'
-import styles from './Section.module.css'
+import styles from '../styles/Section.module.css'
 
 export function Education() {
   return (
