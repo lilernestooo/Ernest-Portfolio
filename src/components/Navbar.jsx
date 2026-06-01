@@ -27,7 +27,7 @@ export default function Navbar({ theme, onToggle }) {
     timerRef.current = setTimeout(() => setCollapsed(true), 3000)
   }, [])
 
-  // Reset timer on any page interaction while visible
+  // Reset timer on any page interaction while visible for 3secs and will appear again once the line been tapped or dragged up
   useEffect(() => {
     const onActivity = () => { if (!collapsed) resetTimer() }
     window.addEventListener('mousemove', onActivity)

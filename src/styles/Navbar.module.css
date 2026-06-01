@@ -208,7 +208,7 @@
   will-change: transform, width, height;
 }
 
-/* === GLOW LINE === */
+/* === GLOW LINE/HIDDEN === */
 .glowLine {
   position: fixed;
   bottom: 24px;
