@@ -6,7 +6,7 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 import { data } from '../data.js'
 import styles from '../styles/Hero.module.css'
 
-// ─── EmailJS Config ───────────────────────────────────────────────────────────
+// ─── EmailJS Configs ───────────────────────────────────────────────────────────
 const EMAILJS_SERVICE_ID       = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID      = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const EMAILJS_CALL_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CALL_TEMPLATE_ID
