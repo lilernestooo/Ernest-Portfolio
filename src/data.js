@@ -6,7 +6,7 @@ export const data = {
   email: "ernestlazatin69@gmail.com",
   github: "https://github.com/lilernestooo",
   linkedin: "https://www.linkedin.com/in/lazatin-ernest-bernard-t-772b07380/",
-  resumeUrl: '/Ernest Lazatin (Resume).pdf', // place your resume.pdf inside the /public folder
+  resumeUrl: '/LAZATIN_ERNEST(CV).pdf', // place your resume.pdf inside the /public folder
 
   about:
     "Full Stack Developer specializing in frontend development, with hands-on experience building modern and responsive web applications. Proficient in frontend technologies such as ReactJS, Vite and TypeScript with a strong focus on clean UI and user experience. Experienced in backend development using Laravel, Node.js and Express, along with database management using PostgreSQL. Skilled in developing RESTful APIs, integrating full-stack systems, and delivering end-to-end solutions.",
