@@ -1,4 +1,4 @@
-import { Waves, School, GraduationCap } from 'lucide-react'
+import { Waves, School, GraduationCap, ClipboardList } from 'lucide-react'
 import { data } from '../data.js'
 import styles from '../styles/Section.module.css'
 
@@ -6,6 +6,7 @@ const iconMap = {
   FloodWatch: Waves,
   'Galang Elementary School Dashboard': School,
   'Track Me': GraduationCap,
+  'DailyMe': ClipboardList,
 }
 
 export default function Projects() {
@@ -31,7 +32,7 @@ export default function Projects() {
 
         <div className={styles.projectGrid}>
           {data.projects.map((proj, i) => {
-            const Icon = iconMap[proj.name] ?? Code
+            const Icon = iconMap[proj.name] ?? ClipboardList
             return (
               <div key={i} className={styles.projectCard}>
 

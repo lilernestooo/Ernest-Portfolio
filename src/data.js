@@ -63,5 +63,13 @@ export const data = {
       stack: ["ReactJS", "Node.js", "Express", "PostgreSQL"],
       icon: "📍",
     },
+    {
+      name: "DailyMe",
+      description:
+        "A user-friendly task and ticketing system for managing daily workflows, tracking tasks, and handling support tickets efficiently.",
+      stack: ["Laravel", "React Breeze", "Vite", "MySQL", "Docker"],
+      icon: "✅",
+    },
   ],
 }
+
