@@ -63,8 +63,6 @@
   border: 1px solid #000;
 }
 
-
-
 .bullets {
   list-style: none;
   display: flex;
@@ -93,20 +91,66 @@
   gap: 6px;
   padding-top: 12px;
 }
+
+/* Plain text tag (used for soft skills and stacks elsewhere) */
 .tag {
   background: var(--bg-tag);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  padding: 3px 10px;     /* slightly tighter */
-  font-size: 0.75rem;    /* slightly smaller */
+  padding: 3px 10px;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.2s;
-  white-space: nowrap;   /* ADD — prevents tags from breaking mid-word */
+  white-space: nowrap;
 }
 .tag:hover {
   border-color: #000;
 }
+
+/* ── Tech stack badge with logo ── */
+.skillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tag);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+}
+.skillBadge:hover {
+  border-color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.skillIcon {
+  display: block;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.skillLabel {
+  line-height: 1;
+}
+
+/* Dark mode: invert monochrome icons (black logos → white) */
+[data-theme='dark'] .skillIcon[src*='/000000'] {
+  filter: invert(1);
+}
+[data-theme='dark'] .skillBadge:hover {
+  border-color: #f0ede8;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.07);
+}
+
 .honorTag {
   color: var(--accent-black);
   border-color: var(--accent-highlight);
@@ -170,7 +214,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
-  align-items: stretch; /* ← ADD THIS */
+  align-items: stretch;
 }
 
 .projectCard {
@@ -183,7 +227,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 100%; /* ← ADD THIS */
+  height: 100%;
 }
 .projectCard:hover {
   box-shadow: var(--shadow-hover);
@@ -199,8 +243,7 @@
   border-radius: 10px;
   background: var(--bg-tag);
   border: 1px solid var(--border);
-  color: var(--text-primary);
-  color: var(--text-muted); /* CHANGE from var(--text-primary) */
+  color: var(--text-muted);
 }
 
 .projName {
