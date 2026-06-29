@@ -38,7 +38,7 @@ export const data = {
     Backend: ["Laravel", "Node.js", "Express", "Firebase"],
     Database: ["MySQL", "PostgreSQL", "Firestore"],
     "Deployment & VCS": ["Vercel", "Render", "GitHub", "Bitbucket"],
-    "Soft Skills": ["Problem Solving", "Communication", "Multitasking", "Logic & Decision Making", "Works Under Pressure"],
+    "Soft Skills": ["Problem Solving", "Communication", "Multitasking", "Logic & Decision Making", "Works Under Pressure", "Adaptability"],
   },
 
   projects: [
