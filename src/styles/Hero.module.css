@@ -76,6 +76,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  order: 0;
 }
 
 .name {
@@ -98,6 +99,7 @@
   gap: 4px;
   font-size: 0.82rem;
   color: var(--text-muted);
+  order: 2;
 }
 
 .metaDot {
@@ -121,6 +123,7 @@
   font-size: 0.95rem;
   color: var(--text-secondary);
   font-weight: 500;
+  order: 1;
 }
 
 /* === TOP RIGHT BADGE === */
@@ -188,6 +191,7 @@
   gap: 6px;
   margin-top: 4px;
   width: 100%;
+  order: 3;
 }
 
 .btnPrimary,
@@ -272,6 +276,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     font-size: 0.75rem;
+    order: 1;
+  }
+
+  .title {
+    order: 2;
   }
 
   .metaDot {
