@@ -398,3 +398,40 @@
   background: var(--black);
   border: 1px solid #fff;
 }
+
+/* ===== SIDEBAR LAYOUT ===== */
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sidebar {
+  flex: 0 0 320px;
+  position: sticky;
+  top: 24px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+.aboutText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}

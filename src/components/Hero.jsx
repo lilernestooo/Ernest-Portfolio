@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import emailjs from '@emailjs/browser'
 import profileLight from '../assets/profile-light.png'
 import profileDark from '../assets/profile-dark.png'
@@ -126,7 +127,7 @@ export default function Hero({ theme }) {
 
   return (
     <section className={styles.hero} id="about">
-      <div className={`container ${styles.inner}`}>
+      <div className={styles.inner}>
 
         <div className={styles.topRow}>
           <div className={styles.photoWrap}>
@@ -210,17 +211,10 @@ export default function Hero({ theme }) {
           </div>
         </div>
 
-        <div className={styles.divider} />
-
-        <div className={styles.aboutSection}>
-          <p className={styles.sectionLabel}>About</p>
-          <p className={styles.about}>{data.about}</p>
         </div>
 
-      </div>
-
       {/* ══════════════════════════════ SCHEDULE MODAL ══════════════════════════════ */}
-      {showSchedule && (
+      {showSchedule && createPortal(
         <div className={styles.modalOverlay} onClick={closeSchedule}>
           <div className={`${styles.modal} ${styles.contactModal}`} onClick={e => e.stopPropagation()}>
 
@@ -362,11 +356,12 @@ export default function Hero({ theme }) {
               </form>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* ══════════════════════════════ CONTACT MODAL ══════════════════════════════ */}
-      {showContact && (
+      {showContact && createPortal(
         <div className={styles.modalOverlay} onClick={closeContact}>
           <div className={`${styles.modal} ${styles.contactModal}`} onClick={e => e.stopPropagation()}>
 
@@ -470,11 +465,12 @@ export default function Hero({ theme }) {
               </form>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* ══════════════════════════════ RESUME MODAL ══════════════════════════════ */}
-      {showResume && (
+      {showResume && createPortal(
         <div className={styles.modalOverlay} onClick={() => setShowResume(false)}>
           <div className={styles.modal} onClick={e => e.stopPropagation()}>
             <div className={styles.modalHeader}>
@@ -492,8 +488,9 @@ export default function Hero({ theme }) {
               </div>
             </div>
             <iframe src="../Ernest-Lazatin.pdf" className={styles.resumeFrame} title="Ernest Lazatin Resume" />
-          </div>
-        </div>
+            </div>
+        </div>,
+        document.body
       )}
 
     </section>
