@@ -244,19 +244,51 @@
 
 /* === MOBILE === */
 @media (max-width: 640px) {
+  .topRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .photoWrap {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+  }
+
   .photo {
-    width: 90px;
-    height: 90px;
+    width: 72px;
+    height: 72px;
+  }
+
+  .info {
+    width: 100%;
+    flex: unset;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .metaRow {
+    flex-direction: row;
+    flex-wrap: wrap;
     font-size: 0.75rem;
+  }
+
+  .metaDot {
+    display: none;
+  }
+
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
   }
 
   .btnPrimary,
   .btnSecondary {
-    font-size: 0.75rem;
-    padding: 8px 12px;
+    width: auto;
+    font-size: 0.72rem;
+    padding: 3px 10px;
   }
 }
 

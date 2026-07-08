@@ -13,6 +13,8 @@ const ICON_SLUGS = {
   'Node.js':      'nodedotjs',
   'Express':      'express',
   'Firebase':     'firebase',
+  'PHP':          'php',
+  'PDO':          'php',
   // Database
   'MySQL':        'mysql',
   'PostgreSQL':   'postgresql',
@@ -36,6 +38,7 @@ const ICON_COLORS = {
   nodedotjs:   '339933',
   express:     '000000',
   firebase:    'FFCA28',
+  php:         '777BB4',
   mysql:       '4479A1',
   postgresql:  '4169E1',
   vercel:      '000000',
