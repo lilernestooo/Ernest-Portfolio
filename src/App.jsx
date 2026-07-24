@@ -7,6 +7,7 @@ import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import { Education, Contact } from './components/EducationContact.jsx'
 import styles from './styles/Section.module.css'
+import GithubActivity from './components/GithubActivity.jsx'
 
 export default function App() {
   const { theme, toggle } = useTheme()
@@ -19,7 +20,7 @@ export default function App() {
           <Hero theme={theme} />
         </aside>
         <div className={styles.content}>
-        <section className={styles.section} id="about">
+        <section className={styles.section} id="abouttt">
             <h2 className={styles.heading}>About</h2>
             <div className={styles.aboutContainer}>
               <p className={styles.aboutText}>{data.about}</p>
@@ -29,7 +30,7 @@ export default function App() {
           <Education />
           <Projects />
           <Skills />
-          <Contact />
+          <GithubActivity />
         </div>
       </main>
       <footer className={styles.footer}>
