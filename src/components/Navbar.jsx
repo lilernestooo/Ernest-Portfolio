@@ -95,7 +95,6 @@ export default function Navbar({ theme, onToggle }) {
       />
 
       <nav className={`${styles.nav} ${collapsed ? styles.navCollapsed : ''}`}>
-        <div className={styles.logo}>EL</div>
 
         <div className={styles.links}>
           {links.map(({ href, label, Icon }) => (

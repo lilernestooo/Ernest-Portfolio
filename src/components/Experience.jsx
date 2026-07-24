@@ -7,7 +7,7 @@ export default function Experience() {
       <div className="container">
         <h2 className={styles.heading}>Work Experience</h2>
         {data.experience.map((job, i) => (
-          <div key={i} >
+          <div key={i} className={styles.expCard}>
             <div className={styles.cardHeader}>
               <div>
                 <h3 className={styles.role}>{job.role}</h3>

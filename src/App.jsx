@@ -19,9 +19,11 @@ export default function App() {
           <Hero theme={theme} />
         </aside>
         <div className={styles.content}>
-          <section className={styles.section} id="about">
+        <section className={styles.section} id="about">
             <h2 className={styles.heading}>About</h2>
-            <p className={styles.aboutText}>{data.about}</p>
+            <div className={styles.aboutContainer}>
+              <p className={styles.aboutText}>{data.about}</p>
+            </div>
           </section>
           <Experience />
           <Education />
