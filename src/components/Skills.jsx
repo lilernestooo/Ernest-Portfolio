@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { data } from '../data.js'
 import styles from '../styles/Section.module.css'
 
@@ -71,6 +72,9 @@ function SkillBadge({ skill }) {
 }
 
 export default function Skills() {
+  const categories = Object.keys(data.skills)
+  const [activeCategory, setActiveCategory] = useState(categories[0])
+
   // Soft skills stay as plain tags (no logos)
   const isSoftSkill = (category) => category === 'Soft Skills'
 
@@ -78,19 +82,32 @@ export default function Skills() {
     <section id="skills" className={styles.section}>
       <div className="container">
         <h2 className={styles.heading}>Skills</h2>
-        <div className={styles.skillsGrid}>
-          {Object.entries(data.skills).map(([category, items]) => (
-            <div key={category} className={styles.skillGroup}>
-              <h4 className={styles.skillCategory}>{category}</h4>
-              <div className={styles.tags}>
-                {items.map((skill, i) =>
-                  isSoftSkill(category)
-                    ? <span key={i} className={styles.tag}>{skill}</span>
-                    : <SkillBadge key={i} skill={skill} />
-                )}
-              </div>
-            </div>
+
+        <div className={styles.skillTabs}>
+          {categories.map(category => (
+            <button
+              key={category}
+              className={`${styles.skillTab} ${activeCategory === category ? styles.skillTabActive : ''}`}
+              onClick={() => setActiveCategory(category)}
+            >
+              {category}
+            </button>
           ))}
+        </div>
+
+        <div className={styles.skillGroup}>
+          <div className={styles.skillGroupHeader}>
+            <h4 className={styles.skillCategory}>{activeCategory}</h4>
+            <span className={styles.skillCount}>{data.skills[activeCategory].length} skills</span>
+          </div>
+
+          <div className={styles.skillItemsGrid}>
+            {data.skills[activeCategory].map((skill, i) =>
+              isSoftSkill(activeCategory)
+                ? <span key={i} className={styles.tag}>{skill}</span>
+                : <SkillBadge key={i} skill={skill} />
+            )}
+          </div>
         </div>
       </div>
     </section>
