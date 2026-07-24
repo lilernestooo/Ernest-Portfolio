@@ -1,5 +1,6 @@
 import { data } from '../data.js'
 import styles from '../styles/Section.module.css'
+import shoreLogo from '../assets/shore.jpg'
 
 export default function Experience() {
   return (
@@ -9,9 +10,14 @@ export default function Experience() {
         {data.experience.map((job, i) => (
           <div key={i} className={styles.expCard}>
             <div className={styles.cardHeader}>
-              <div>
-                <h3 className={styles.role}>{job.role}</h3>
-                <p className={styles.company}>{job.company}</p>
+            <div className={styles.companyRow}>
+            <div className={styles.companyLogoWrap}>
+                  <img src={shoreLogo} alt={job.company} className={styles.companyLogo} />
+                </div>
+                <div>
+                  <h3 className={styles.role}>{job.role}</h3>
+                  <p className={styles.company}>{job.company}</p>
+                </div>
               </div>
               <span className={styles.period}>{job.period}</span>
             </div>

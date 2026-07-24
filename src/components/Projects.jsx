@@ -56,19 +56,19 @@ function StackBadge({ tech }) {
   const color = slug ? ICON_COLORS[slug] : null
 
   return (
-    <span className={styles.skillBadge} title={tech}>
+    <span className={styles.stackBadge} title={tech}>
       {slug && (
         <img
           src={`https://cdn.simpleicons.org/${slug}/${color ?? '888888'}`}
           alt={tech}
-          className={styles.skillIcon}
+          className={styles.stackIcon}
           width={14}
           height={14}
           loading="lazy"
           onError={e => { e.currentTarget.style.display = 'none' }}
         />
       )}
-      <span className={styles.skillLabel}>{tech}</span>
+      <span className={styles.stackLabel}>{tech}</span>
     </span>
   )
 }
@@ -79,19 +79,6 @@ export default function Projects() {
       <div className="container">
         <div className={styles.sectionHeader}>
           <h2 className={styles.heading}>Projects</h2>
-
-          <a
-            href="https://github.com/lilernestooo"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.viewAll}
-          >
-            View All Projects
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
-          </a>
         </div>
 
         <div className={styles.projectGrid}>
@@ -108,7 +95,7 @@ export default function Projects() {
 
                 <p className={styles.projDesc}>{proj.description}</p>
 
-                <div className={styles.tags}>
+                <div className={styles.projectTags}>
                   {proj.stack.map((s, j) => (
                     <StackBadge key={j} tech={s} />
                   ))}
@@ -118,6 +105,24 @@ export default function Projects() {
             )
           })}
         </div>
+
+        <div className={styles.viewAllWrap}>
+          
+          <a href="https://github.com/lilernestooo"
+          target="_blank"
+          rel="noreferrer"
+          className={styles.viewAll}
+        >
+          View All Projects
+          <span className={styles.viewAllArrow}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+        </div>
+
       </div>
     </section>
   )

@@ -94,18 +94,19 @@
 
 /* Plain text tag (used for soft skills and stacks elsewhere) */
 .tag {
-  background: var(--bg-tag);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  border-radius: var(--radius-sm);
-  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.75rem;
   font-weight: 500;
-  transition: all 0.2s;
+  color: var(--text-secondary);
   white-space: nowrap;
+  transition: color 0.2s, transform 0.2s;
+  cursor: default;
 }
 .tag:hover {
-  border-color: #000;
+  color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 /* ── Tech stack badge with logo ── */
@@ -113,21 +114,16 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-tag);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 4px 10px;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary);
   white-space: nowrap;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: color 0.2s, transform 0.2s;
   cursor: default;
 }
 .skillBadge:hover {
-  border-color: #000;
+  color: var(--text-primary);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .skillIcon {
@@ -151,17 +147,35 @@
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.07);
 }
 
-.honorTag {
+/* === EDUCATION ACHIEVEMENT BADGE === */
+.achievementBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--accent-black);
-  border-color: var(--accent-highlight);
+  white-space: nowrap;
+  transition: color 0.2s, transform 0.2s;
+  cursor: default;
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--accent-highlight);
   background: linear-gradient(90deg, #fef3c7, #fde68a, #fef3c7);
   background-size: 200% 100%;
-  animation: goldShimmer 2.5s ease-in-out infinite;
+  animation: achievementShimmer 2.5s ease-in-out infinite;
   position: relative;
   overflow: hidden;
 }
 
-.honorTag::before {
+.achievementBadge:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+  background: var(--accent-highlight);
+  border-color: var(--accent-highlight);
+}
+
+.achievementBadge::before {
   content: '';
   position: absolute;
   top: 0;
@@ -174,39 +188,33 @@
     rgba(255, 255, 255, 0.5) 50%,
     transparent 100%
   );
-  animation: shine 2.5s ease-in-out infinite;
+  animation: achievementShine 2.5s ease-in-out infinite;
 }
 
-.honorTag:hover {
-  background: var(--accent-highlight);
-  color: #ffffff;
-  border-color: var(--accent-highlight);
-}
-
-/* ── Dark mode ── */
-[data-theme='dark'] .honorTag {
-  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
-  background-size: 200% 100%;
-  animation: goldShimmer 2.5s ease-in-out infinite;
-  color: #fcd34d;
-  border-color: #92400e;
-}
-
-[data-theme='dark'] .honorTag:hover {
-  background: var(--accent-highlight);
-  color: #ffffff;
-  border-color: var(--accent-highlight);
-}
-
-@keyframes goldShimmer {
+@keyframes achievementShimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
-@keyframes shine {
+@keyframes achievementShine {
   0%   { left: -75%; }
   50%  { left: 125%; }
   100% { left: 125%; }
+}
+
+/* Dark mode */
+[data-theme='dark'] .achievementBadge {
+  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
+  background-size: 200% 100%;
+  animation: achievementShimmer 2.5s ease-in-out infinite;
+  color: #fcd34d;
+  border-color: #92400e;
+}
+
+[data-theme='dark'] .achievementBadge:hover {
+  background: var(--accent-highlight);
+  color: #ffffff;
+  border-color: var(--accent-highlight);
 }
 
 /* === PROJECT GRID === */
@@ -369,27 +377,22 @@
   font-weight: 600;
   color: #111110;
   text-decoration: none;
-  border: 1px solid #111110;
-  padding: 7px 16px;
-  border-radius: 99px;
-  transition: all 0.2s ease;
+  transition: gap 0.2s ease, opacity 0.2s ease;
 }
 
 .viewAll:hover {
-  background: #111110;
-  color: #ffffff;
-  opacity: 1;
-  transform: translateY(-1px);
+  gap: 10px;
+  opacity: 0.7;
+}
+
+.viewAllWrap {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 32px;
 }
 
 [data-theme='dark'] .viewAll {
   color: #f0ede8;
-  border-color: #f0ede8;
-}
-
-[data-theme='dark'] .viewAll:hover {
-  background: #f0ede8;
-  color: #0e0e0e;
 }
 
 /* Dark Mode */
@@ -397,6 +400,16 @@
   color: var(--white);
   background: var(--black);
   border: 1px solid #fff;
+}
+
+.viewAllArrow {
+  display: inline-flex;
+  animation: arrowSlide 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowSlide {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(4px); }
 }
 
 /* ===== SIDEBAR LAYOUT ===== */
@@ -550,4 +563,76 @@
 .skillItemsGrid .tag {
   width: 100%;
   justify-content: flex-start;
+}
+
+.companyRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.companyLogoWrap {
+  height: 48px;
+  width: 90px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.companyLogo {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* === PROJECT STACK BADGE (isolated from .skillBadge) === */
+.stackBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: color 0.2s, transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-tag);
+}
+.stackBadge:hover {
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  border-color: var(--text-muted);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.stackIcon {
+  display: block;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.stackLabel {
+  line-height: 1;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+[data-theme='dark'] .stackIcon[src*='/000000'] {
+  filter: invert(1);
+}
+[data-theme='dark'] .stackBadge:hover {
+  border-color: #f0ede8;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.07);
 }

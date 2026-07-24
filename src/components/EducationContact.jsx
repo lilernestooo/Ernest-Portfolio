@@ -17,7 +17,7 @@ export function Education() {
             </div>
             <div className={styles.tags} style={{ marginTop: '12px' }}>
               {edu.honors.map((h, j) => (
-                <span key={j} className={`${styles.tag} ${styles.honorTag}`}>🏆 {h}</span>
+                <span key={j} className={styles.achievementBadge}>🏆 {h}</span>
               ))}
             </div>
           </div>
