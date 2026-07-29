@@ -35,7 +35,7 @@ export const data = {
 
   skills: {
     Frontend: ["React.js", "Vite", "TypeScript", "Vue.js"],
-    Backend: ["Laravel", "Node.js", "Express", "Firebase", "PHP", "PDO"],
+    Backend: ["Laravel", "Node.js", "Express", "Firebase", "PHP", "PDO", "AdonisJS"],
     Database: ["MySQL", "PostgreSQL", "Firestore"],
     "Deployment & VCS": ["Vercel", "Render", "GitHub", "Bitbucket"],
     "Soft Skills": ["Problem Solving", "Communication", "Multitasking", "Logic & Decision Making", "Works Under Pressure", "Adaptability"],

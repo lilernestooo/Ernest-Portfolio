@@ -16,6 +16,7 @@ const ICON_SLUGS = {
   'Firebase':     'firebase',
   'PHP':          'php',
   'PDO':          'php',
+  'AdonisJS':     'adonisjs',
   // Database
   'MySQL':        'mysql',
   'PostgreSQL':   'postgresql',
@@ -42,6 +43,7 @@ const ICON_COLORS = {
   php:         '777BB4',
   mysql:       '4479A1',
   postgresql:  '4169E1',
+  adonisjs:    '5A45FF',
   vercel:      '000000',
   render:      '46E3B7',
   github:      '181717',
