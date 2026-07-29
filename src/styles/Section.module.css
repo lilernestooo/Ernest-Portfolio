@@ -31,6 +31,17 @@
   100% { background-position: -200% 0; }
 }
 
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.sectionHeader .heading {
+  margin-bottom: 0;
+}
+
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -371,17 +382,10 @@
   .contactCard {
     padding: 36px 24px;
   }
-  .heading {
-    text-align: center;
-  }
-  .heading::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
   .sectionHeader {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 12px;
   }
   .viewAllWrap {
@@ -396,17 +400,6 @@
     justify-content: center;
     text-align: center;
   }
-}
-
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 36px;
-}
-
-.sectionHeader .heading {
-  margin-bottom: 0;
 }
 
 .viewAll {
