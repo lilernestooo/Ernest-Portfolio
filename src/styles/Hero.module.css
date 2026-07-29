@@ -213,13 +213,17 @@
 }
 
 .btnPrimary {
-  background: var(--text-primary);
-  color: var(--bg);
+  background: var(--bg-tag);
+  color: var(--text-primary);
+  border-color: var(--border);
 }
 .btnPrimary:hover {
-  opacity: 0.85;
+  background: var(--text-primary);
+  color: var(--bg);
+  border-color: var(--text-primary);
   transform: translateY(-1px);
 }
+
 .btnPrimary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -232,6 +236,8 @@
   border-color: var(--border);
 }
 .btnSecondary:hover {
+  background: var(--text-primary);
+  color: var(--bg);
   border-color: var(--text-primary);
   transform: translateY(-1px);
 }
