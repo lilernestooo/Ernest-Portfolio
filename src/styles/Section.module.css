@@ -353,9 +353,49 @@
   border-top: 1px solid var(--border);
 }
 
+@media (max-width: 900px) {
+  .layout {
+    align-items: center;
+  }
+  .content {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 640px) {
-  .section { padding: 48px 0; }
-  .contactCard { padding: 36px 24px; }
+  .section {
+    padding: 48px 0;
+  }
+  .contactCard {
+    padding: 36px 24px;
+  }
+  .heading {
+    text-align: center;
+  }
+  .heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sectionHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .viewAllWrap {
+    justify-content: center;
+  }
+  .companyRow {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  .cardHeader {
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .sectionHeader {

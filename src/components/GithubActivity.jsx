@@ -20,19 +20,6 @@ export default function GithubActivity() {
               loading="lazy"
             />
           </div>
-
-          <div className={styles.githubStatsRow}>
-            <img
-              src={`https://github-readme-stats.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=default&hide_border=true&count_private=true`}
-              alt="GitHub stats"
-              loading="lazy"
-            />
-            <img
-              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${GITHUB_USERNAME}&layout=compact&hide_border=true&theme=default`}
-              alt="Top languages"
-              loading="lazy"
-            />
-          </div>
         </div>
         <div className={styles.githubCta}>
             
