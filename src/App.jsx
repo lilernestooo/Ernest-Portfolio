@@ -3,6 +3,7 @@ import { data } from './data.js'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import Experience from './components/Experience.jsx'
+import Services from './components/Services.jsx'
 import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import { Education, Contact } from './components/EducationContact.jsx'
@@ -26,6 +27,7 @@ export default function App() {
               <p className={styles.aboutText}>{data.about}</p>
             </div>
           </section>
+          <Services />
           <Experience />
           <Education />
           <Projects />

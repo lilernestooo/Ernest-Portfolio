@@ -166,7 +166,10 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--accent-black);
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  box-sizing: border-box;
+  line-height: 1.4;
   transition: color 0.2s, transform 0.2s;
   cursor: default;
   padding: 6px 12px;
@@ -382,6 +385,14 @@
   .contactCard {
     padding: 36px 24px;
   }
+  .tags {
+    justify-content: center;
+  }
+  .achievementBadge {
+    border-radius: 16px;
+    text-align: left;
+    padding: 8px 14px;
+  }
   .sectionHeader {
     flex-direction: column;
     align-items: flex-start;
@@ -509,6 +520,9 @@
 .expCard:last-child {
   margin-bottom: 0;
 }
+.expCard .cardHeader:last-child {
+  margin-bottom: 0;
+}
 
 .card {
   background: var(--bg-card);
@@ -605,12 +619,13 @@
 }
 
 .companyLogoWrap {
-  height: 48px;
+  height: 56px;
   width: 90px;
   border-radius: 8px;
   border: 1px solid var(--border);
   overflow: hidden;
   flex-shrink: 0;
+  background: #ffffff;
 }
 
 .companyLogo {
@@ -668,4 +683,75 @@
 [data-theme='dark'] .stackBadge:hover {
   border-color: #f0ede8;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.07);
+}
+
+/* === SERVICES === */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+}
+
+.serviceCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.serviceCard:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+.serviceIcon {
+  display: flex;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.serviceTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.serviceDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* === SERVICES: MOBILE === */
+@media (max-width: 640px) {
+  .serviceGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .serviceCard {
+    padding: 22px 20px;
+    align-items: center;
+    text-align: center;
+  }
+  .serviceTitle {
+    font-size: 1.05rem;
+  }
+  .serviceDesc {
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch devices: no hover lift */
+@media (hover: none) {
+  .serviceCard:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
 }

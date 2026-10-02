@@ -13,14 +13,35 @@ export const data = {
 
   experience: [
     {
+      role: "Fullstack Programmer",
+      company: "Laus Group of Companies",
+      period: "August 2026 – Present",
+      logo: "lgc",
+      logoFit: "contain",
+    },
+    {
       role: "Fullstack Developer Intern",
       company: "Shore360, Inc.",
       period: "January 2026 – April 2026",
-      bullets: [
-        "Refactored legacy codebases to improve code quality, readability, and maintainability while aligning with modern development standards.",
-        "Contributed to debugging, issue resolution, and feature enhancements for an internal intranet system within an active development workflow.",
-        "Developed multiple projects by applying architectural patterns, coding best practices, and optimization techniques introduced by senior developers.",
-      ],
+      logo: "shore",
+    },
+  ],
+
+    services: [
+     {
+      icon: "code",
+      title: "Full Stack Web Development",
+      description: "Specializing in PHP, I build responsive, end-to-end web applications, from the React frontend to a secure Laravel backend and database.",
+    },
+    {
+      icon: "palette",
+      title: "Web Designing",
+      description: "Designing clean, modern and user-friendly interfaces that look great on every screen size.",
+    },
+    {
+      icon: "database",
+      title: "Data Entry",
+      description: "Detail-focused data encoding and cleanup, backed by database skills to keep your records structured and easy to find.",
     },
   ],
 
